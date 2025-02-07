@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import Alert from './Alert'; // Add this import
+import { API_BASE_URL } from '../config';
 
 const MentorForm = () => {
   const [applications, setApplications] = useState([])
@@ -33,7 +34,7 @@ const MentorForm = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/mentor/applications", {
+        const response = await fetch(`${API_BASE_URL}/api/mentor/applications`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -57,7 +58,7 @@ const MentorForm = () => {
 
   const handleDownload = async (fileType, applicationId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/mentor/download/${fileType}/${applicationId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/mentor/download/${fileType}/${applicationId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -82,7 +83,7 @@ const MentorForm = () => {
 
   const handleViewMedia = async (type, applicationId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/mentor/download/${type}/${applicationId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/mentor/download/${type}/${applicationId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -118,7 +119,7 @@ const MentorForm = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/mentor/approve-application`, {
+      const response = await fetch(`${API_BASE_URL}/api/mentor/approve-application`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

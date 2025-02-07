@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Alert from './Alert'
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 const MenteeApplication = () => {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const MenteeApplication = () => {
     formDataToSend.append("video", video)
 
     try {
-      const response = await fetch("http://localhost:5000/api/mentee/application", {
+      const response = await fetch(`${API_BASE_URL}/api/mentee/application`, {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

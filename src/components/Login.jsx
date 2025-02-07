@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Alert from './Alert'
+import { API_BASE_URL } from '../config';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Login = () => {
     setError("")
     setSuccessMessage("")
     try {
-      const response = await fetch("http://localhost:5000/api/mentee/login", {
+      const response = await fetch(`${API_BASE_URL}/api/mentee/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -35,7 +36,7 @@ const Login = () => {
         localStorage.setItem('userType', data.userType)
 
         // Check if user has submitted application
-        const applicationCheck = await fetch("http://localhost:5000/api/mentee/check-application", {
+        const applicationCheck = await fetch(`${API_BASE_URL}/api/mentee/check-application`, {
           headers: {
             'Authorization': `Bearer ${data.token}`
           }

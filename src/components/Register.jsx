@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Alert from './Alert'
+import { API_BASE_URL } from '../config';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const Register = () => {
     setIsLoading(true)
     setError("")
     try {
-      const response = await fetch("http://localhost:5000/api/mentee/register", {
+      const response = await fetch(`${API_BASE_URL}/api/mentee/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

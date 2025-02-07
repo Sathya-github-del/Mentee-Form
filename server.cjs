@@ -8,7 +8,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // Local development
+    'https://mentee-form-theta.vercel.app/' // Replace with your Vercel domain
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 const JWT_SECRET = 'jnof238u982huibsdjbf23'; // In production, use environment variable

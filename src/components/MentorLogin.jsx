@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Alert from './Alert'
+import { API_BASE_URL } from '../config';
 
 const MentorLogin = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const MentorLogin = () => {
     setError("")
     setSuccessMessage("")
     try {
-      const response = await fetch("http://localhost:5000/api/mentor/login", {
+      const response = await fetch(`${API_BASE_URL}/api/mentor/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
 import './MenteeDashboard.css';
+import { API_BASE_URL } from '../config';
 
 const ProgressTimeline = ({ currentStatus, courseAssigned }) => {
     const steps = [
@@ -44,7 +45,7 @@ const MenteeDashboard = () => {
 
     const fetchMenteeApplication = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/mentee/my-application', {
+            const response = await fetch(`${API_BASE_URL}/api/mentee/my-application`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -68,7 +69,7 @@ const MenteeDashboard = () => {
 
     const fetchPhoto = async (applicationId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/mentor/download/photo/${applicationId}`, {
+            const response = await fetch(`${API_BASE_URL}/api/mentor/download/photo/${applicationId}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }

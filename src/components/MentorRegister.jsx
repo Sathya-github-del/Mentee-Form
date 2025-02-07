@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Alert from './Alert'
+import { API_BASE_URL } from '../config';
 
 const MentorRegister = () => {
   const [formData, setFormData] = useState({
@@ -132,7 +133,7 @@ const MentorRegister = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/mentor/register", {
+      const response = await fetch(`${API_BASE_URL}/api/mentor/register`, {
         method: "POST",
         body: formDataToSend,
         // Remove the Content-Type header - it will be set automatically with FormData

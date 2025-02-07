@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Alert from './Alert'
 import ResumeDownload from './ResumeDownload';
+import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
     const [mentors, setMentors] = useState([])
@@ -18,10 +19,10 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         try {
             const [mentorsRes, applicationsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/admin/mentors', {
+                fetch(`${API_BASE_URL}/api/admin/mentors`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 }),
-                fetch('http://localhost:5000/api/admin/applications', {
+                fetch(`${API_BASE_URL}/api/admin/applications`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 })
             ]);
@@ -42,7 +43,7 @@ const AdminDashboard = () => {
 
     const handleApproveMentor = async (mentorId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/admin/approve-mentor/${mentorId}`, {
+            const response = await fetch(`${API_BASE_URL}/api/admin/approve-mentor/${mentorId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
@@ -61,7 +62,7 @@ const AdminDashboard = () => {
 
     const handleAssignMentee = async (applicationId, mentorId) => {
         try {
-            const response = await fetch('http://localhost:5000/api/admin/assign-mentee', {
+            const response = await fetch(`${API_BASE_URL}/api/admin/assign-mentee`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ const AdminDashboard = () => {
     const handleDeleteAllData = async () => {
         if (window.confirm('Are you sure you want to delete ALL data? This action cannot be undone!')) {
             try {
-                const response = await fetch('http://localhost:5000/api/admin/delete-all-data', {
+                const response = await fetch(`${API_BASE_URL}/api/admin/delete-all-data`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('adminToken')}`

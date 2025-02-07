@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { API_BASE_URL } from '../config';
 const AllData = () => {
     const [data, setData] = useState({
         mentors: [],
@@ -17,10 +17,10 @@ const AllData = () => {
     const fetchCredentials = async () => {
         try {
             const [mentorsRes, menteesRes] = await Promise.all([
-                fetch('http://localhost:5000/api/admin/mentor-credentials', {
+                fetch('${API_BASE_URL}/api/admin/mentor-credentials', {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 }),
-                fetch('http://localhost:5000/api/admin/mentee-credentials', {
+                fetch('${API_BASE_URL}/api/admin/mentee-credentials', {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 })
             ]);

@@ -1,9 +1,10 @@
 import React from 'react';
+import { API_BASE_URL } from '../config';
 
 const ResumeDownload = ({ filename }) => {
     const handleDownload = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/mentor/resume/${filename}`, {
+            const response = await fetch(`${API_BASE_URL}/api/mentor/resume/${filename}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
                 }
