@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173', // Local development
-    'https://mentee-form-theta.vercel.app/' // Replace with your Vercel domain
+    'https://mentee-form-six.vercel.app/' // Replace with your Vercel domain
   ],
   credentials: true
 }));
