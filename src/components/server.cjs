@@ -6,7 +6,7 @@ const fs = require('fs');
 const { Mentee, Mentor, Application, Admin } = require('./db.cjs'); // Add Admin to imports
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -580,5 +580,5 @@ app.get('/api/mentor/resume/:filename', authenticateToken, (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
