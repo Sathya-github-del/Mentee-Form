@@ -10,9 +10,13 @@ const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors({
   origin: [
+     'http://localhost:5173',
     'https://mentee-form-six.vercel.app/' // Replace with your Vercel domain
   ],
-  credentials: true
+   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 app.use(express.json());
 
