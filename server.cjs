@@ -8,16 +8,39 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
+
+// Updated CORS configuration
 app.use(cors({
   origin: [
-     'http://localhost:5173',
-    'https://mentee-form-six.vercel.app/' // Replace with your Vercel domain
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://mentee-form-six.vercel.app'
   ],
-   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'Origin',
+    'X-Requested-With',
+    'Accept'
+  ],
   credentials: true,
   optionsSuccessStatus: 200
 }));
+
+// Add pre-flight handling for all routes
+app.options('*', cors());
+
+// Handle OPTIONS requests explicitly
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Accept');
+    return res.status(200).json({});
+  }
+  next();
+});
+
 app.use(express.json());
 
 const JWT_SECRET = 'jnof238u982huibsdjbf23'; // In production, use environment variable
